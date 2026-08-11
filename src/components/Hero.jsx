@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Rocket, MessageCircle, ShieldCheck, Package, Star, ArrowRight } from "lucide-react";
 import { contato } from "../data/conteudo";
@@ -34,43 +34,43 @@ function Particulas() {
   );
 }
 
-function FogueteSVG() {
-  const reduced = useReducedMotion();
-  const chamas = [
-    { d: "M86 214 C80 236 80 250 90 268 C95 252 94 234 86 214 Z", fill: "#EF6C1A", delay: 0 },
-    { d: "M100 212 C90 244 90 264 100 290 C110 264 110 244 100 212 Z", fill: "#F2BD1D", delay: 0.15 },
-    { d: "M114 214 C106 234 105 252 110 268 C120 250 120 236 114 214 Z", fill: "#FF8A3D", delay: 0.3 },
-  ];
+function AnimacaoVideo() {
+  const [frameIndex, setFrameIndex] = useState(0);
+
+  // Smooth thruster flame flicker interval
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFrameIndex((prev) => (prev === 0 ? 1 : 0));
+    }, 200);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <svg
-      viewBox="0 0 200 300"
-      className="h-full w-full"
-      role="img"
-      aria-label="Foguete ATOPY decolando"
+    <div
+      className="relative h-full w-full flex items-center justify-center pointer-events-none select-none"
+      style={{
+        maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
+      }}
     >
-      <defs>
-        <linearGradient id="atopy-rocket-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#EF6C1A" />
-          <stop offset="100%" stopColor="#FF8A3D" />
-        </linearGradient>
-      </defs>
-      {chamas.map((chama) => (
-        <motion.path
-          key={chama.d}
-          d={chama.d}
-          fill={chama.fill}
-          style={{ transformBox: "fill-box", transformOrigin: "top center" }}
-          animate={reduced ? undefined : { scaleY: [0.8, 1.2, 0.8] }}
-          transition={{ duration: 0.9, delay: chama.delay, repeat: Infinity, ease: "easeInOut" }}
+      {/* Dynamic Thruster Flame Glow */}
+      <div className="absolute bottom-12 h-36 w-36 rounded-full bg-brand-orange/35 blur-3xl animate-pulse pointer-events-none" />
+
+      {/* 100% Transparent Perfectly Aligned Rocket Animation */}
+      <picture className="h-full w-full flex items-center justify-center relative z-10">
+        <source
+          type="image/webp"
+          srcSet={frameIndex === 0 ? "/animacao-video/foguete_opt_a.webp" : "/animacao-video/foguete_opt_b.webp"}
         />
-      ))}
-      <path d="M68 96 L38 178 L68 158 Z" fill="#3BA4F0" />
-      <path d="M132 96 L162 178 L132 158 Z" fill="#3BA4F0" />
-      <rect x="68" y="72" width="64" height="144" rx="32" fill="url(#atopy-rocket-body)" />
-      <path d="M100 8 C118 32 130 54 132 82 L68 82 C70 54 82 32 100 8 Z" fill="#EF6C1A" />
-      <circle cx="100" cy="120" r="17" fill="#EAF6FF" stroke="#3BA4F0" strokeWidth="7" />
-      <rect x="84" y="164" width="32" height="8" rx="4" fill="#C9550E" opacity="0.5" />
-    </svg>
+        <img
+          src={frameIndex === 0 ? "/animacao-video/foguete_transparente_opt_a.png" : "/animacao-video/foguete_transparente_opt_b.png"}
+          alt="Foguete ATOPY Transparente"
+          className="h-full w-full object-contain filter drop-shadow-[0_15px_30px_rgba(235,94,40,0.22)]"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+    </div>
   );
 }
 
@@ -204,9 +204,9 @@ export default function Hero() {
             <motion.div
               animate={reduced ? undefined : { y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="mx-auto h-[340px] w-[240px] md:h-[440px] md:w-[300px]"
+              className="mx-auto h-[420px] w-[340px] md:h-[540px] md:w-[440px]"
             >
-              <FogueteSVG />
+              <AnimacaoVideo />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}

@@ -44,12 +44,12 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-brand-orange to-brand-orange-light py-20 md:py-24">
+    <section className="bg-ink py-20 md:py-24">
       <SectionReveal className="container-site text-center">
         <motion.h2 variants={fadeUp} className="text-white">
           Receba ofertas e novidades
         </motion.h2>
-        <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-white/85">
+        <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-xl text-lg text-white/70">
           Cadastre seu e-mail e fique por dentro dos lançamentos da ATOPY.
         </motion.p>
         <motion.div variants={fadeUp} className="relative mx-auto mt-9 max-w-lg">
@@ -60,7 +60,7 @@ export default function Newsletter() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative flex items-center justify-center gap-3 rounded-full bg-white/15 px-8 py-5 font-semibold text-white ring-1 ring-white/30 backdrop-blur"
+                className="relative flex items-center justify-center gap-3 rounded-full bg-white/10 px-8 py-5 font-semibold text-white ring-1 ring-white/20 backdrop-blur"
                 role="status"
               >
                 <Confetti />
@@ -96,13 +96,13 @@ export default function Newsletter() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Seu melhor e-mail"
-                  className="w-full flex-1 rounded-full border-0 bg-white px-6 py-4 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-4 focus:ring-white/40"
+                  className="w-full flex-1 rounded-full border-0 bg-white/10 px-6 py-4 text-white placeholder:text-white/50 focus:outline-none focus:ring-4 focus:ring-brand-orange/40"
                 />
                 <motion.button
                   type="submit"
                   whileHover={{ y: -2, scale: 1.03 }}
                   whileTap={{ scale: 0.96 }}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 font-semibold text-white transition-colors hover:bg-ink-soft"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-4 font-semibold text-white transition-colors hover:bg-brand-orange-dark"
                 >
                   Cadastrar
                   <Send size={16} aria-hidden="true" />

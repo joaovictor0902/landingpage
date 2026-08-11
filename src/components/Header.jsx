@@ -14,7 +14,7 @@ const links = [
 function Logo({ className = "" }) {
   return (
     <a href="#inicio" aria-label="ATOPY — voltar ao início" className={`inline-flex items-center ${className}`}>
-      <img src={logoImg} alt="ATOPY" className="h-10 w-auto max-h-11 object-contain" />
+      <img src={logoImg} alt="ATOPY" className="h-14 md:h-16 w-auto max-h-16 object-contain" />
     </a>
   );
 }
@@ -51,7 +51,7 @@ export default function Header() {
           scrolled ? "glass shadow-card" : "bg-transparent"
         }`}
       >
-        <div className="container-site flex h-[72px] items-center justify-between gap-4">
+        <div className="container-site flex h-20 md:h-24 items-center justify-between gap-4">
           <Logo />
           <nav aria-label="Navegação principal" className="hidden items-center gap-8 lg:flex">
             {links.map((link) => (
@@ -111,7 +111,7 @@ export default function Header() {
           >
             <div className="flex items-center justify-between">
               <a href="#inicio" onClick={() => setOpen(false)} aria-label="ATOPY — voltar ao início" className="inline-flex items-center">
-                <img src={logoImg} alt="ATOPY" className="h-10 w-auto max-h-11 object-contain" />
+                <img src={logoImg} alt="ATOPY" className="h-14 w-auto max-h-16 object-contain" />
               </a>
               <button
                 type="button"
